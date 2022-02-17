@@ -4,6 +4,7 @@
 
 
 from PyQt5 import QtWidgets, QtGui, uic
+from controller import customersController 
 
 def displayMainMenu(self):
     mainMenuWindow = uic.loadUi("view/menuView.ui", self)
@@ -18,7 +19,7 @@ def displayMainMenu(self):
 
 
 def displayClients(self):
-    print("in Clients")
+    window = customersController.CustomersWindow()
 
 def displayStock(self):
     print("in Stock")

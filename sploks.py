@@ -7,12 +7,12 @@ import os
 sys.path.append(os.getcwd() + "\\packages") # Importing packages file
 from PyQt5 import QtWidgets
 
-from controller import menuController
+from controller import mainMenuController
 
 class Sploks(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        menuController.displayMainMenu(self) # Calls function in controller
+        mainMenuController.displayMainMenu(self) # Calls function in controller
 
 
 app = QtWidgets.QApplication(sys.argv)
