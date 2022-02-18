@@ -2,9 +2,9 @@
 # Date : 17.02.2022
 # Version : 1.0
 
-
 from PyQt5 import QtWidgets, QtGui, uic
-from controller import customersController 
+
+from controller import customersController, stockController, staffController, contractsController
 
 def displayMainMenu(self):
     mainMenuWindow = uic.loadUi("view/menuView.ui", self)
@@ -17,18 +17,21 @@ def displayMainMenu(self):
 
     mainMenuWindow.show()
 
-
+# Redirects in the customers controller
 def displayClients(self):
-    window = customersController.CustomersWindow()
+    customersController.CustomersUi()
 
+# Redirects in the stock controller
 def displayStock(self):
-    print("in Stock")
+    stockController.StockUi() 
 
+# Redirects in the staff controller
 def displayStaff(self):
-    print("in Staff")
+    staffController.StaffUi()
 
+# Redirects in the contracts controller
 def displayContracts(self):
-    print("in Contracts")
+    contractsController.ContractsUi()
 
 
 
