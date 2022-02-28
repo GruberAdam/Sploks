@@ -7,7 +7,7 @@ import os
 sys.path.append(os.getcwd() + "\\packages") # Importing packages file
 from PyQt5 import QtWidgets
 
-from controller import mainMenuController
+from controller import mainMenuController, keyPressController
 
 class Sploks(QtWidgets.QMainWindow):
     def __init__(self):
@@ -16,7 +16,8 @@ class Sploks(QtWidgets.QMainWindow):
 
     # Event listener when a key is pressed
     def keyPressEvent(self, e):
-        mainMenuController.keyPressEvent(self, e)
+        keyPressController.keyPressEvent(self, e)
+
 
 app = QtWidgets.QApplication(sys.argv)
 window = Sploks()
