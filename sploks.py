@@ -14,6 +14,9 @@ class Sploks(QtWidgets.QMainWindow):
         super().__init__()
         mainMenuController.displayMainMenu(self) # Calls function in controller
 
+    # Event listener when a key is pressed
+    def keyPressEvent(self, e):
+        mainMenuController.keyPressEvent(self, e)
 
 app = QtWidgets.QApplication(sys.argv)
 window = Sploks()

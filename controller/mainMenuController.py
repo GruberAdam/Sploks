@@ -3,6 +3,7 @@
 # Version : 1.0
 
 from PyQt5 import QtWidgets, QtGui, uic
+from PyQt5.QtCore import Qt
 
 from controller import customersController, stockController, staffController, contractsController
 
@@ -16,6 +17,19 @@ def displayMainMenu(self):
     mainMenuWindow.btnContracts.clicked.connect(displayContracts)
 
     mainMenuWindow.show()
+
+# Redirects to the right function based on the key pressed
+def keyPressEvent(self, e):
+    print(e.key())
+
+    if e.key() == Qt.Key.Key_A: # When user presses the "a" key
+        displayClients(self)
+    if e.key() == Qt.Key.Key_S: # When user presses the "s" key
+        displayStock(self)
+    if e.key() == Qt.Key.Key_D: # When user presses the "d" key
+        displayStaff(self)
+    if e.key() == Qt.Key.Key_F: # When user presses the "f" key
+        displayContracts(self)
 
 # Redirects in the customers controller
 def displayClients(self):
