@@ -7,9 +7,8 @@ def getCustomers(self):
     connection = connectToDatabase(self) # Opens a connection with the database
     cursor = connection.cursor()
     cursor.execute(query)
-    results = cursor.fetchall() # Fetch results
-
-    print(results)
-
+    customers = cursor.fetchall() # Fetch results
     connection.close() # Closes connection
+
+    return customers
 
