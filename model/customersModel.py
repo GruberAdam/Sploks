@@ -2,13 +2,9 @@ from model.database import *
 
 
 def getCustomers(self):
-    query ="SELECT * FROM sploks.customers"
-
+    query ="SELECT sploks.customers.*, sploks.npas.npa, sploks.npas.town FROM sploks.customers LEFT JOIN sploks.npas ON sploks.customers.id = sploks.npas.id"
     connection = connectToDatabase(self) # Opens a connection with the database
-    cursor = connection.cursor()
-    cursor.execute(query)
-    customers = cursor.fetchall() # Fetch results
-    connection.close() # Closes connection
+    customers = executeQuery(self, connection, query)
 
     return customers
 

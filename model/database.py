@@ -1,7 +1,8 @@
 from multiprocessing import connection
 import mysql.connector
 from mysql.connector import errorcode
-        
+
+
 def connectToDatabase(self):
     try:
         connection = mysql.connector.connect(
@@ -19,3 +20,14 @@ def connectToDatabase(self):
             print(err)
 
     return connection
+
+# Function designed to execute a query
+# connection param (connection with the database)
+# query param (string with the SQL script)
+def executeQuery(self, connection, query):
+    cursor = connection.cursor()
+    cursor.execute(query)
+    output = cursor.fetchall() # Fetch results
+    connection.close() # Closes connection
+
+    return output

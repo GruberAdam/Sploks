@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>924</width>
-    <height>550</height>
+    <width>846</width>
+    <height>536</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,11 +26,6 @@
     <property name="locale">
      <locale language="French" country="Switzerland"/>
     </property>
-    <column>
-     <property name="text">
-      <string>Id</string>
-     </property>
-    </column>
     <column>
      <property name="text">
       <string>Nom</string>
