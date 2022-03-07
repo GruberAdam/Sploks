@@ -4,7 +4,6 @@
 
 from PyQt5 import QtWidgets, QtGui, uic
 from controller import customersController, stockController, staffController, contractsController
-from model import customersModel
 
 def displayMainMenu(self):
     mainMenuWindow = uic.loadUi("view/menuView.ui", self)
@@ -32,6 +31,3 @@ def displayStaff(self):
 # Redirects in the contracts controller
 def displayContracts(self):
     contractsController.ContractsUi()
-
-
-
