@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>846</width>
+    <width>927</width>
     <height>536</height>
    </rect>
   </property>
@@ -26,6 +26,11 @@
     <property name="locale">
      <locale language="French" country="Switzerland"/>
     </property>
+    <column>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </column>
     <column>
      <property name="text">
       <string>Nom</string>
