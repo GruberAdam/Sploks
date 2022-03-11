@@ -8,3 +8,9 @@ def getCustomers(self):
 
     return customers
 
+def getCustomerById(self, id):
+    query =f"SELECT * FROM sploks.customers WHERE sploks.customers.id = {id};"
+    connection = connectToDatabase(self) # Opens a connection with the database
+    customer = executeQuery(self, connection, query)
+
+    return customer

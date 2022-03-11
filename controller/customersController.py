@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtGui, uic, QtCore
 from model.customersModel import *
+
 class CustomersUi(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -32,14 +33,22 @@ class CustomersUi(QtWidgets.QMainWindow):
     def eventFilter(self, source, event):
         if self.customersWindow.tableCustomers.selectedIndexes() != []: # Checks that the user clicked on a cell
             if event.type() == QtCore.QEvent.MouseButtonDblClick: # If user double clicked
-
                 row = self.customersWindow.tableCustomers.currentRow() # gets row clicked
                 id = self.customersWindow.tableCustomers.item(row, 0).text() # gets ID based on click
+                print("clicked on person ID : ", id)
+                CustomerDetailsUi(id)
                 
 
-                
-
-                
-            
         return False
  
+class CustomerDetailsUi(QtWidgets.QMainWindow):
+    def __init__(self,id):
+        super().__init__(id)
+        self.id = id
+        self.customerDetailWindow = uic.loadUi("view/customerDetailsView.ui", self)
+
+        self.customer = getCustomerById(self, id)
+
+        print(dir(self.customerDetailWindow.CustomerDetail))
+
+        self.customersWindow.show()
