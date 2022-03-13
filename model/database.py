@@ -2,7 +2,8 @@ from multiprocessing import connection
 import mysql.connector
 from mysql.connector import errorcode
 
-
+# Function designed to create a connection to the database
+# The connection is then returned
 def connectToDatabase(self):
     try:
         connection = mysql.connector.connect(
