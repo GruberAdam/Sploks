@@ -9,7 +9,7 @@ def getCustomers(self):
     return customers
 
 def getCustomerById(self, id):
-    query =f"SELECT * FROM sploks.customers WHERE sploks.customers.id = {id};"
+    query =f"SELECT sploks.customers.*, sploks.npas.npa FROM sploks.customers LEFT JOIN sploks.npas ON sploks.customers.id = sploks.npas.id  WHERE sploks.customers.id = {id};"
     connection = connectToDatabase(self) # Opens a connection with the database
     customer = executeQuery(self, connection, query)
 

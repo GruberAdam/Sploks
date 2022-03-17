@@ -46,6 +46,9 @@
        <property name="text">
         <string>Prénom :</string>
        </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse</set>
+       </property>
       </widget>
      </item>
      <item>
@@ -107,6 +110,9 @@
        </property>
        <property name="text">
         <string>...</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -323,6 +329,79 @@
     </property>
     <property name="text">
      <string>Nb Contrats:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnEditer">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>200</y>
+      <width>140</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Editer</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnAnnuler">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>200</y>
+      <width>91</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Annuler</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSupprimer">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>200</y>
+      <width>91</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Supprimer</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnValider">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>200</y>
+      <width>121</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Valider</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>
