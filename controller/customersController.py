@@ -4,7 +4,15 @@ from model.customersModel import *
 class CustomersUi(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.customersWindow = uic.loadUi("view/customersView.ui", self) 
+        
+        self.customersWindow = uic.loadUi("view/customersView.ui", self)
+
+        self.loadCustomers()
+
+        print("Customer data loaded")
+        
+        self.customersWindow.show()
+    def loadCustomers(self):
         self.customers = getCustomers(self)
 
         self.customersWindow.tableCustomers.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
@@ -25,9 +33,6 @@ class CustomersUi(QtWidgets.QMainWindow):
             self.customersWindow.tableCustomers.setItem(index, 8, QtWidgets.QTableWidgetItem(str(customer[6]))) # Sets the mobile phone
 
         self.customersWindow.tableCustomers.viewport().installEventFilter(self) # Event listener
-        print("Customer data loaded")
-        
-        self.customersWindow.show()
 
     def eventFilter(self, source, event):
         if self.customersWindow.tableCustomers.selectedIndexes() != []: # Checks that the user clicked on a cell
@@ -39,6 +44,8 @@ class CustomersUi(QtWidgets.QMainWindow):
                 self.detailledUi.setupUi(id)
                 
         return False
+    
+    
  
 class CustomerDetailsUi(QtWidgets.QMainWindow):
     def __init__(self):
@@ -65,7 +72,6 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
 
     def fillTheLabels(self):
         # Fill the labels
-        print("in")
         self.customerDetailWindow.lblPrenom.setText(str(self.customer[0][2]))
         self.customerDetailWindow.lblNom.setText(str(self.customer[0][1]))
         self.customerDetailWindow.lblAdresse.setText(str(self.customer[0][3]))
@@ -74,7 +80,9 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
         self.customerDetailWindow.lblTelephone.setText(str(self.customer[0][6]))
         self.customerDetailWindow.lblEmail.setText(str(self.customer[0][5]))
 
+
     def editButton(self, id):
+        
         print(self.edit)
         if self.edit == False:
             self.edit = True
@@ -110,15 +118,33 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
             self.customerDetailWindow.btnValider.setEnabled(False)
             self.customerDetailWindow.btnAnnuler.setEnabled(False)
 
-            
+    # When user clicks on the "Supprimer" Button    
     def deleteButton(self):
         print("delete")
-    
-    def confirmButton(self):
-        print(self.customerDetailWindow.lblPrenom.text())
-        self.updatedCustomer = [self.customer]
 
-    def cancelButton(self):
+    # When user clicks on the "Valider" Button
+    def confirmButton(self):
+
+        # Stores new value in an array
+        self.updatedCustomer = {
+        'firstName' :self.customerDetailWindow.lblPrenom.toPlainText(), 
+        'lastName' : self.customerDetailWindow.lblNom.toPlainText(), 
+        'address' : self.customerDetailWindow.lblAdresse.toPlainText(), 
+        'npa' : self.customerDetailWindow.lblNPA.toPlainText(), 
+        'mobile' : self.customerDetailWindow.lblNumero.toPlainText(), 
+        'phone' : self.customerDetailWindow.lblTelephone.toPlainText(), 
+        'email' : self.customerDetailWindow.lblEmail.toPlainText()
+        }
+        updateCustomerById(self,self.id,self.updatedCustomer)
+        self.updated = True
         self.customerDetailWindow.close()
+        
+
+        
+
+    # When user clicks on the "Annuler" Button
+    # This function basically resets all the labels to their original values
+    def cancelButton(self):
+        self.fillTheLabels()
     
     

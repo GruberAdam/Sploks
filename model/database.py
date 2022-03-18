@@ -29,6 +29,6 @@ def executeQuery(self, connection, query):
     cursor = connection.cursor()
     cursor.execute(query)
     output = cursor.fetchall() # Fetch results
+    connection.commit() # Commit changes
     connection.close() # Closes connection
-
     return output
