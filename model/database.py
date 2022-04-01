@@ -2,7 +2,8 @@ from multiprocessing import connection
 import mysql.connector
 from mysql.connector import errorcode
 
-
+# Function designed to create a connection to the database
+# The connection is then returned
 def connectToDatabase(self):
     try:
         connection = mysql.connector.connect(
@@ -28,6 +29,6 @@ def executeQuery(self, connection, query):
     cursor = connection.cursor()
     cursor.execute(query)
     output = cursor.fetchall() # Fetch results
+    connection.commit() # Commit changes
     connection.close() # Closes connection
-
     return output
