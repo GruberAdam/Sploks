@@ -26,8 +26,12 @@ def connectToDatabase(self):
 # connection param (connection with the database)
 # query param (string with the SQL script)
 def executeQuery(self, connection, query):
-    cursor = connection.cursor()
-    cursor.execute(query)
+    for singleQuery in query.split(";"): # For every ";" split the execution of the query in different parts
+        if len(singleQuery) > 0:
+            cursor = connection.cursor()
+            cursor.execute(singleQuery)
+            
+        
     output = cursor.fetchall() # Fetch results
     connection.commit() # Commit changes
     connection.close() # Closes connection
