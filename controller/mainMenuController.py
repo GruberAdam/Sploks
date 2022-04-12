@@ -5,6 +5,7 @@
 from PyQt5 import QtWidgets, QtGui, uic
 from controller import customersController, stockController, staffController, contractsController
 
+# Displays the main menu
 def displayMainMenu(self):
     mainMenuWindow = uic.loadUi("view/menuView.ui", self)
 

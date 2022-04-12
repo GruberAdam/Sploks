@@ -9,6 +9,7 @@ from PyQt5 import QtWidgets
 
 from controller import mainMenuController, keyPressController
 
+# It's a class that displays the main menu and listens for key presses.
 class Sploks(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()

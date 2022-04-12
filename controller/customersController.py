@@ -4,13 +4,15 @@ from model.customersModel import *
 
 needUpdate = False
 
+# It loads the customers from the database and displays them in a table
 class CustomersUi(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.customersWindow = uic.loadUi("view/customersView.ui", self)
         self.loadCustomers()
         self.customersWindow.show()
-        
+
+    # Method designed to load the customers from the database and fills the table with them.        
     def loadCustomers(self):
         global needUpdate
         self.customers = getCustomers(self)
@@ -36,7 +38,17 @@ class CustomersUi(QtWidgets.QMainWindow):
 
         needUpdate = False
 
+
+
+    #It checks if the user double clicked on a cell in the table, if so, it gets the ID of the
+    #customer and opens a new window with the details of the customer
+
+    #:param source: The object that the event is coming from
+    #:param event: The event that was triggered
+    #:return: The return value is a boolean value. If the event is handled, the function should
+    #return True. If the event should be propagated further, the function should return False.
     def eventFilter(self, source, event):
+
         global needUpdate
         if needUpdate == True:
             self.loadCustomers()
@@ -51,6 +63,7 @@ class CustomersUi(QtWidgets.QMainWindow):
     
     
  
+#It's a class that displays a window with a customer's details
 class CustomerDetailsUi(QtWidgets.QMainWindow):
     
     def __init__(self):
@@ -58,7 +71,9 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
         self.customerDetailWindow = uic.loadUi("view/customerDetailsView.ui", self)
         self.edit = False
         
-    
+    #Sets up the UI 
+        
+    #:param id: the id of the customer
     def setupUi(self, id):
         self.id = id
 
@@ -75,8 +90,8 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
 
         self.show()
 
+    # It's filling the labels with the data from the database.
     def fillTheLabels(self):
-        # Fill the labels
         self.customerDetailWindow.lblPrenom.setText(str(self.customer[0][2]))
         self.customerDetailWindow.lblNom.setText(str(self.customer[0][1]))
         self.customerDetailWindow.lblAdresse.setText(str(self.customer[0][3]))
@@ -85,8 +100,14 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
         self.customerDetailWindow.lblTelephone.setText(str(self.customer[0][6]))
         self.customerDetailWindow.lblEmail.setText(str(self.customer[0][5]))
 
-
+    
+    #When the edit button is clicked, the text of the labels is set to be editable, and the buttons
+    #are enabled
+    
+    #:param id: the id of the customer
+    
     def editButton(self, id):
+
         if self.edit == False:
             self.edit = True
             
@@ -139,6 +160,7 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
         'phone' : self.customerDetailWindow.lblTelephone.toPlainText(), 
         'email' : self.customerDetailWindow.lblEmail.toPlainText()
         }
+        
         updateCustomerById(self,self.id,self.updatedCustomer)
         self.updated = True
         self.customerDetailWindow.close()
