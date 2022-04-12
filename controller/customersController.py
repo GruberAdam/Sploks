@@ -1,18 +1,18 @@
 from PyQt5 import QtWidgets, QtGui, uic, QtCore
+
 from model.customersModel import *
+
+needUpdate = False
 
 class CustomersUi(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        
         self.customersWindow = uic.loadUi("view/customersView.ui", self)
-
         self.loadCustomers()
-
-        print("Customer data loaded")
-        
         self.customersWindow.show()
+        
     def loadCustomers(self):
+        global needUpdate
         self.customers = getCustomers(self)
 
         self.customersWindow.tableCustomers.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
@@ -34,20 +34,25 @@ class CustomersUi(QtWidgets.QMainWindow):
 
         self.customersWindow.tableCustomers.viewport().installEventFilter(self) # Event listener
 
+        needUpdate = False
+
     def eventFilter(self, source, event):
+        global needUpdate
+        if needUpdate == True:
+            self.loadCustomers()
         if self.customersWindow.tableCustomers.selectedIndexes() != []: # Checks that the user clicked on a cell
             if event.type() == QtCore.QEvent.MouseButtonDblClick: # If user double clicked
                 row = self.customersWindow.tableCustomers.currentRow() # gets row clicked
                 id = self.customersWindow.tableCustomers.item(row, 0).text() # gets ID based on click
-                print("clicked on person ID : ", id)
+
                 self.detailledUi = CustomerDetailsUi() # Prepare the second window
-                self.detailledUi.setupUi(id)
-                
+                self.detailledUi.setupUi(id)                
         return False
     
     
  
 class CustomerDetailsUi(QtWidgets.QMainWindow):
+    
     def __init__(self):
         super().__init__()
         self.customerDetailWindow = uic.loadUi("view/customerDetailsView.ui", self)
@@ -82,8 +87,6 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
 
 
     def editButton(self, id):
-        
-        print(self.edit)
         if self.edit == False:
             self.edit = True
             
@@ -124,6 +127,7 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
 
     # When user clicks on the "Valider" Button
     def confirmButton(self):
+        global needUpdate
 
         # Stores new value in an array
         self.updatedCustomer = {
@@ -138,13 +142,9 @@ class CustomerDetailsUi(QtWidgets.QMainWindow):
         updateCustomerById(self,self.id,self.updatedCustomer)
         self.updated = True
         self.customerDetailWindow.close()
-        
-
-        
+        needUpdate = True
 
     # When user clicks on the "Annuler" Button
     # This function basically resets all the labels to their original values
     def cancelButton(self):
         self.fillTheLabels()
-    
-    
