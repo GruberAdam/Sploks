@@ -4,8 +4,6 @@ from controller import mainMenuController
 
 # Redirects to the right function based on the key pressed
 def keyPressEvent(self, e):
-    print(e.key())
-
     if e.key() == Qt.Key.Key_A: # When user presses the "a" key
         mainMenuController.displayClients(self)
     if e.key() == Qt.Key.Key_S: # When user presses the "s" key
